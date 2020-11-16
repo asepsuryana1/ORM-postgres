@@ -1,9 +1,26 @@
 var express = require('express');
 var router = express.Router();
+var models = require('../models/index');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/', function (req, res, next) {
+  models.user.findAll({}).then(function (user) {
+    res.json(user)
+  }).catch((err) => {
+    res.send(err)
+  })
+  })
 
-module.exports = router;
+  router.post('/', function (req, res) {
+    models.user.create({
+      email: req.body.email,
+
+    }).then(function (user) {
+      res.json(user);
+    }).catch((err) => {
+      res.send(err)
+
+    })
+  });
+
+  module.exports = router;

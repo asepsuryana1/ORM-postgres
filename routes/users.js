@@ -4,15 +4,15 @@ var models = require('../models/index');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  models.user.findAll({}).then(function (user) {
-    res.json(user)
+  models.User.findAll({}).then(function (users) {
+    res.json(users)
   }).catch((err) => {
     res.send(err)
   })
   })
 
   router.post('/', function (req, res) {
-    models.user.create({
+    models.User.create({
       email: req.body.email,
 
     }).then(function (user) {
@@ -22,5 +22,6 @@ router.get('/', function (req, res, next) {
 
     })
   });
+  
 
   module.exports = router;

@@ -4,7 +4,11 @@ var models = require('../models/index');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  models.User.findAll({}).then(function (users) {
+  models.User.findAll({
+    include:[{
+      model: models.Todo
+    }]
+  }).then(function (users) {
     res.json(users)
   }).catch((err) => {
     res.send(err)
